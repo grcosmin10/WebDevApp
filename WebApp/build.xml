@@ -1,0 +1,124 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<project name="Web App" basedir="." default="usage">
+
+	<target name="init" description="declaring Param">
+
+		<property name="tomcat.home" value="D:\Dev_tools\servers\apache-tomcat-8.5.34" />
+		<property name="tomcat.home" value="D:\Dev_tools\servers\apache-tomcat-8.5.34" />
+		<property name="tomcat.lib" value="${tomcat.home}/lib" />
+		<property name="deploy.path" value="${tomcat.home}/webapps" />
+		<property name="src.dir" value="${basedir}/src" />
+		<property name="build.dir" value="${basedir}/build" />
+		<property name="dist.dir" value="${basedir}/dist" />
+		<property name="webContent.dir" value="${basedir}/WebContent" />
+		<property name="war.name" value="WebApp" />
+		<path id="master-classpath">
+			<fileset dir="${tomcat.lib}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<pathelement path="${build.dir}" />
+		</path>
+
+	</target>
+
+	<target name="usage" description="what this build file can do">
+
+		<echo message="" />
+		<echo message="ant compile --> to compile" />
+		<echo message="ant clear --> to clear" />
+		<echo message="ant deploy --> deploy the war" />
+		<echo message="" />
+
+
+
+	</target>
+
+	<target name="clear" depends="init" description="clearing up">
+		<!-- Delete the build file-->
+		<delete file="${build.dir}" />
+		<!--Delete the war file from the root -->
+		<delete>
+			<fileset dir="." includes="*.war" />
+		</delete>
+
+	</target>
+
+
+	<target name="compile"  description="compile main source tree java files" depends="prepare">
+
+		<javac destdir="${build.dir}/WEB-INF/classes"  debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="master-classpath" />
+		</javac>
+
+
+	</target>
+
+	<target name="prepare" depends="clear">
+
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/WEB-INF" />
+		<mkdir dir="${build.dir}/WEB-INF/classes" />
+		<mkdir dir="${build.dir}/WEB-INF/lib" />
+		<mkdir dir="${build.dir}/WEB-INF/data" />
+
+		<!-- Copy files from source to build directory  -->
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+				<include name="*.html" />
+				<include name="*.js" />
+				<include name="*.css" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}">
+			<fileset dir="${webContent.dir}/WEB-INF/jsp">
+				<include name="*.jsp" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/WEB-INF">
+			<fileset dir="${webContent.dir}/WEB-INF">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/WEB-INF/data">
+			<fileset dir="${src.dir}">
+				<include name="*.db" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/WEB-INF/lib">
+			<fileset dir="${webContent.dir}/WEB-INF/lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+	</target>
+
+
+
+	<target name="deploy" depends="compile" description="Deploying the product">
+		  <tstamp>
+		      <format property="TODAY_MY" pattern="yyyyMMdd-HHmm"  locale="en,UK" />
+		  </tstamp>
+
+		<delete>
+			<fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml" />
+		</delete>
+		<war destfile="${war.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
+			<fileset dir="${build.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</war>
+		<copy todir="${deploy.path}" preservelastmodified="true">
+			<fileset dir=".">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+
+
+</project>
