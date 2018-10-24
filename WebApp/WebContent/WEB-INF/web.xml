@@ -6,7 +6,6 @@
       This web app uses a GenericServlet to convert temperates 
       to Fahrenheit and Centigrade.
     </description>
-
     <servlet>
         <servlet-name>tempCservlet</servlet-name>
         <servlet-class>com.webDevelopment.TempConverterServlet</servlet-class>

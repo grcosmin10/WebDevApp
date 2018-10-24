@@ -75,7 +75,7 @@ public class TempConverterServlet extends HttpServlet {
 	try {
 	    HttpSession session = req.getSession();
 	    session.setAttribute("result", result);       // save result in the session map
-	    res.sendRedirect("convert.jsp");          // redirect to 'convert.jsp'
+	    res.sendRedirect("convert.jsp");           // redirect to 'convert.jsp'
 	}
 	catch(IOException e) { }
     }
