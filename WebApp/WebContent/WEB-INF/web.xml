@@ -1,5 +1,23 @@
-<web-app >
-  <welcome-file-list>    
-    <welcome-file>Hi.jsp</welcome-file>
-  </welcome-file-list>
-</web-app>
+<?xml version = "1.0" encoding = "ISO-8859-1"?>
+
+<web-app>
+    <display-name>GenericServlet example</display-name>
+    <description>
+      This web app uses a GenericServlet to convert temperates 
+      to Fahrenheit and Centigrade.
+    </description>
+
+    <servlet>
+        <servlet-name>tempCservlet</servlet-name>
+        <servlet-class>com.webDevelopment.TempConverterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>tempCservlet</servlet-name>
+        <url-pattern>/converter</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+      <welcome-file>input.html</welcome-file>
+    </welcome-file-list>
+</web-app>     

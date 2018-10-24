@@ -47,9 +47,9 @@
 	</target>
 
 
-	<target name="compile"  description="compile main source tree java files" depends="prepare">
+	<target name="compile" description="compile main source tree java files" depends="prepare">
 
-		<javac destdir="${build.dir}/WEB-INF/classes"  debug="true" deprecation="false" optimize="false" failonerror="true">
+		<javac destdir="${build.dir}/WEB-INF/classes" debug="true" deprecation="false" optimize="false" failonerror="true">
 			<src path="${src.dir}" />
 			<classpath refid="master-classpath" />
 		</javac>
@@ -69,14 +69,20 @@
 		<copy todir="${build.dir}">
 			<fileset dir="${src.dir}">
 				<include name="**/*.java" />
-				<include name="*.html" />
+
 				<include name="*.js" />
-				<include name="*.css" />
+
 			</fileset>
 		</copy>
 		<copy todir="${build.dir}">
 			<fileset dir="${webContent.dir}/WEB-INF/jsp">
 				<include name="*.jsp" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}">
+			<fileset dir="${webContent.dir}/WEB-INF">
+				<include name="*.css" />
+				<include name="*.html" />
 			</fileset>
 		</copy>
 		<copy todir="${build.dir}/WEB-INF">
@@ -100,9 +106,9 @@
 
 
 	<target name="deploy" depends="compile" description="Deploying the product">
-		  <tstamp>
-		      <format property="TODAY_MY" pattern="yyyyMMdd-HHmm"  locale="en,UK" />
-		  </tstamp>
+		<tstamp>
+			<format property="TODAY_MY" pattern="yyyyMMdd-HHmm" locale="en,UK" />
+		</tstamp>
 
 		<delete>
 			<fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml" />

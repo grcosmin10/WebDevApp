@@ -1,0 +1,13 @@
+a {color: #151b8d; text-decoration:none;}
+a:visited {color: #151b8d;}
+a:hover {color: #fff; background-color: #666;}
+
+.legend {color: #990000;}
+input {color: darkblue; font-weight: bold;}
+fieldset {width: 400px;}
+
+.results {
+    font-size: 105%;
+    font-weight: bold;
+    color: #0000a0;
+}
