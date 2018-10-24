@@ -4,8 +4,7 @@
 
 	<target name="init" description="declaring Param">
 
-		<property name="tomcat.home" value="D:\Dev_tools\servers\apache-tomcat-8.5.34" />
-		<property name="tomcat.home" value="D:\Dev_tools\servers\apache-tomcat-8.5.34" />
+		<property name="tomcat.home" value="C:\Development\servers\apache-tomcat-8.5.34" />
 		<property name="tomcat.lib" value="${tomcat.home}/lib" />
 		<property name="deploy.path" value="${tomcat.home}/webapps" />
 		<property name="src.dir" value="${basedir}/src" />
