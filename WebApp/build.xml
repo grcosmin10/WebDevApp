@@ -80,9 +80,13 @@
 			</fileset>
 		</copy>
 		<copy todir="${build.dir}">
-			<fileset dir="${webContent.dir}/WEB-INF">
-				<include name="*.css" />
+			<fileset dir="${webContent.dir}/WEB-INF/html">
 				<include name="*.html" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}">
+			<fileset dir="${webContent.dir}/WEB-INF/css">
+				<include name="*.css" />
 			</fileset>
 		</copy>
 		<copy todir="${build.dir}/WEB-INF">
